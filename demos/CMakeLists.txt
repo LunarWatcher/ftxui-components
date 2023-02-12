@@ -12,7 +12,7 @@ function(demo binName fileName)
     )
 endfunction()
 
-demo(wrapping TextWrapping)
+demo(custom-checkbox CheckboxCustomElements)
 # Dependencies {{{
 include(FetchContent)
 

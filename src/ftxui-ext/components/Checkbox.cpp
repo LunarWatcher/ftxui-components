@@ -2,7 +2,17 @@
 #include <ftxui/component/event.hpp>
 #include <tuple>
 
-namespace ftxui::ext {
+namespace ftxui {
+
+// TODO: can I macro this into oblivion? Waste of code, IMO
+Component ext::Checkbox(const std::string& label, bool* isChecked, Ref<ext::CheckboxOption> opt) {
+    return std::make_shared<ext::CheckboxImpl>(label, isChecked, opt);
+}
+Component ext::Checkbox(ftxui::Element label, bool* isChecked, Ref<ext::CheckboxOption> opt) {
+    return std::make_shared<ext::CheckboxImpl>(label, isChecked, opt);
+}
+
+namespace ext {
 
 CheckboxImpl::CheckboxImpl(const std::string& label, bool* isChecked, ftxui::Ref<CheckboxOption> opt) : CheckboxImpl(ftxui::text(label), isChecked, opt) {}
 CheckboxImpl::CheckboxImpl(ftxui::Element label, bool* isChecked, ftxui::Ref<CheckboxOption> opt) : label(label), isChecked(isChecked), opt(opt) {
@@ -57,7 +67,19 @@ bool CheckboxImpl::OnEvent(ftxui::Event event) {
 
 // CheckboxOption {{{
 // Implementations {{{
-//
+CheckboxOption CheckboxOption::Simple() {
+    return {
+        [](const DynLabelState& state) -> Element {
+            auto prefix = text(state.state ? "▣ " : "☐ ");
+            auto label = state.label;
+
+            if (state.active) label |= bold;
+            if (state.focused) label |= inverted;
+
+            return hbox({ prefix, label });
+        }
+    };
+}
 // }}}
 // Functions {{{
 void CheckboxOption::notify() {
@@ -65,4 +87,5 @@ void CheckboxOption::notify() {
 }
 // }}}
 // }}}
+}
 }

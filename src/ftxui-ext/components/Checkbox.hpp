@@ -39,4 +39,8 @@ public:
     virtual bool Focusable() const override { return true; }
 };
 
+Component Checkbox(const std::string& label, bool* isChecked, Ref<CheckboxOption> opt = CheckboxOption::Simple());
+Component Checkbox(ftxui::Element label, bool* isChecked, Ref<CheckboxOption> opt = CheckboxOption::Simple());
+
+
 }
