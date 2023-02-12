@@ -1,6 +1,10 @@
 # Ftxui components
 
-Many of the standard ftxui components are arguably severely lacking. This mini-library exists to bridge the gap of useful and flexible components.
+Many of the standard ftxui components are arguably severely lacking. This mini-library exists to bridge the gap of useful and flexible components, on the principle of separation of concern.
+
+Some of the changes introduced by this library could be handled by declaring custom Options for the relevant classes, but this is shit for a number of reasons:
+* This restricts standard use of elements by an implementation-dependent factors: a Simple() Option may exist, but does it exist for `paragraph`? What about `hbox`? Or `vbox`? Granted, most labels are going to be text-only, but there are 7 different ways (that I'm aware of; there may be more, or be made more in the future) to define a text element
+* It shifts Options into a matrix problem in the standard. Assume there were three different checkbox styles (meaning different ways to render the checkbox itself, excluding the label); the current system would default all those three to use `text`. What about paragraph uses? To support all three styles for paragraphs as well, you'd have to add three more functions. One for each style using paragraph. However, there's also `vtext` and another four different paragraph styles, for a grand total of 7 label element types * 3 checkbox styles = 21 functions. This library opens for (optional) direct Element specification, cutting that number to just 3: one for each style of checkbox.
 
 This library requires C++20, and is targeted at ftxui's master branch, due to 3.0.0 being [broken on Clang 14/15](https://github.com/ArthurSonzogni/FTXUI/pull/421), and no other versions existing at the time of writing.
 
