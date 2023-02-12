@@ -11,6 +11,7 @@ namespace ftxui::ext {
 
 struct CheckboxOption {
     static CheckboxOption Simple();
+    static CheckboxOption Check();
     
     std::function<Element(const DynLabelState&)> transform;
     std::function<void()> onChange = nullptr;

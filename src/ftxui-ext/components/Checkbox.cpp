@@ -80,6 +80,20 @@ CheckboxOption CheckboxOption::Simple() {
         }
     };
 }
+
+CheckboxOption CheckboxOption::Check() {
+    return {
+        [](const DynLabelState& state) -> Element {
+            auto prefix = text(state.state ? "☑ " : "☐ ");
+            auto label = state.label;
+
+            if (state.active) label |= bold;
+            if (state.focused) label |= inverted;
+
+            return hbox({ prefix, label });
+        }
+    };
+}
 // }}}
 // Functions {{{
 void CheckboxOption::notify() {
