@@ -1,5 +1,7 @@
 # Ftxui components
 
+**Note:** The library is fairly new at the time of writing, and therefore lacks any extended features. These will be added as I start needing them. 
+
 Many of the standard ftxui components are arguably severely lacking. This mini-library exists to bridge the gap of useful and flexible components, on the principle of separation of concern.
 
 Some of the changes introduced by this library could be handled by declaring custom Options for the relevant classes, but this is shit for a number of reasons:
